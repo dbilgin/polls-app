@@ -1,12 +1,35 @@
 import React from 'react';
 import {Provider} from 'react-redux';
-import store from './store/reducers';
-import QuestionList from './components/QuestionList';
+import store from './src/store/reducers';
+import {NavigationContainer} from '@react-navigation/native';
+import {createStackNavigator} from '@react-navigation/stack';
+import QuestionListScreen from './src/screens/QuestionListScreen';
+import QuestionDetailScreen from './src/screens/QuestionDetailScreen';
+
+export type RootStackParamList = {
+  QuestionListScreen: undefined;
+  QuestionDetailScreen: {questionId: number};
+};
+
+const Stack = createStackNavigator<RootStackParamList>();
 
 export default function App() {
   return (
-    <Provider store={store}>
-      <QuestionList />
-    </Provider>
+    <NavigationContainer>
+      <Provider store={store}>
+        <Stack.Navigator initialRouteName="QuestionListScreen">
+          <Stack.Screen
+            name="QuestionListScreen"
+            component={QuestionListScreen}
+            options={{title: 'Question List'}}
+          />
+          <Stack.Screen
+            name="QuestionDetailScreen"
+            component={QuestionDetailScreen}
+            options={{title: 'Question'}}
+          />
+        </Stack.Navigator>
+      </Provider>
+    </NavigationContainer>
   );
 }

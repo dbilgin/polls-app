@@ -10,3 +10,7 @@ const api = axios.create({
 export const getQuestions = (page: number = 1) => {
   return api.get(`questions/${page}`);
 };
+
+export const voteQuestion = (questionId: number, choiceId: number) => {
+  return api.post(`questions/${questionId}/choices/${choiceId}`);
+};

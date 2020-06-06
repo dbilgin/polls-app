@@ -1,5 +1,5 @@
 import {Reducer} from 'redux';
-import {Question} from '../../Models/Question';
+import {Question} from '../../../Models/Question';
 import {QuestionActions} from '../actions';
 import {AxiosError} from 'axios';
 
@@ -18,6 +18,7 @@ export enum QuestionActionTypes {
   FETCH_QUESTION = 'FETCH_QUESTION',
   FETCH_QUESTION_SUCCESS = 'FETCH_QUESTION_SUCCESS',
   FETCH_QUESTION_FAILURE = 'FETCH_QUESTION_FAILURE',
+  UPDATE_VOTE_WITH_URL = 'UPDATE_VOTE_WITH_URL',
 }
 
 export const questions: Reducer<QuestionState, QuestionActions> = (
@@ -49,6 +50,22 @@ export const questions: Reducer<QuestionState, QuestionActions> = (
         ...state,
         isFetching: false,
         error: action.error,
+      };
+    case QuestionActionTypes.UPDATE_VOTE_WITH_URL:
+      let voteUpdatedQuesitons = [...state.questions];
+      for (const question of voteUpdatedQuesitons) {
+        if (question.id === action.questionId) {
+          for (const choice of question.choices) {
+            if (choice.url === action.voteUrl) {
+              choice.votes++;
+            }
+          }
+          break;
+        }
+      }
+      return {
+        ...state,
+        questions: voteUpdatedQuesitons,
       };
     default:
       return state;

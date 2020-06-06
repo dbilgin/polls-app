@@ -1,6 +1,6 @@
 import {QuestionActionTypes} from './reducers/questions';
-import {Question} from '../Models/Question';
-import {getQuestions} from '../PollsService';
+import {Question} from '../../Models/Question';
+import {getQuestions} from '../../PollsService';
 import {Dispatch} from 'redux';
 import {AxiosError} from 'axios';
 
@@ -39,6 +39,17 @@ export function fetchQuestionFailure(
   };
 }
 
+export function updateVoteWithUrl(
+  questionId: number,
+  voteUrl: string,
+): UpdateVoteWıthUrlAction {
+  return {
+    type: QuestionActionTypes.UPDATE_VOTE_WITH_URL,
+    questionId: questionId,
+    voteUrl: voteUrl,
+  };
+}
+
 interface FetchQuestionAction {
   type: QuestionActionTypes.FETCH_QUESTION;
 }
@@ -54,7 +65,14 @@ interface FetchQuestionFailureAction {
   error: AxiosError;
 }
 
+interface UpdateVoteWıthUrlAction {
+  type: QuestionActionTypes.UPDATE_VOTE_WITH_URL;
+  questionId: number;
+  voteUrl: string;
+}
+
 export type QuestionActions =
   | FetchQuestionAction
   | FetchQuestionSuccessAction
-  | FetchQuestionFailureAction;
+  | FetchQuestionFailureAction
+  | UpdateVoteWıthUrlAction;

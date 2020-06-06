@@ -10,17 +10,27 @@ import {
 } from 'react-native';
 import {fetchQuestion} from '../store/actions';
 import {RootState} from '../store/reducers';
-import {Question} from '../Models/Question';
-import QuestionCard from './QuestionCard';
-import {SafeAreaView} from 'react-navigation';
+import {Question} from '../../Models/Question';
+import QuestionCard from '../components/QuestionCard';
+import {StackNavigationProp} from '@react-navigation/stack';
+import {RootStackParamList} from '../../App';
 
 const images = [
-  require('../assets/1.png'),
-  require('../assets/2.png'),
-  require('../assets/3.png'),
+  require('../images/1.png'),
+  require('../images/2.png'),
+  require('../images/3.png'),
 ];
 
-export default function QuestionList() {
+type QuestionListScreenNavigationProp = StackNavigationProp<
+  RootStackParamList,
+  'QuestionListScreen'
+>;
+
+type Props = {
+  navigation: QuestionListScreenNavigationProp;
+};
+
+const QuestionListScreen: React.FC<Props> = ({navigation}) => {
   const dispatch = useDispatch();
   const qs = useSelector((state: RootState) => state.questions);
 
@@ -50,7 +60,9 @@ export default function QuestionList() {
       newIndex = newIndex - 3;
     }
     const randomImage = images[newIndex];
-    return <QuestionCard q={item} image={randomImage} />;
+    return (
+      <QuestionCard q={item} image={randomImage} navigation={navigation} />
+    );
   };
 
   const endReached = () => {
@@ -71,28 +83,29 @@ export default function QuestionList() {
   };
 
   return (
-    <SafeAreaView style={{flex: 1}} forceInset={{top: 'always'}}>
-      <View style={styles.container}>
-        <FlatList
-          style={{width: '100%'}}
-          keyExtractor={(item, index) => item.url + index.toString()}
-          data={[...qs.questions, ...qs.questions]}
-          renderItem={renderItem}
-          onEndReached={endReached}
-          onEndReachedThreshold={0.1}
-          ItemSeparatorComponent={() => <View style={styles.separator} />}
-          ListFooterComponent={renderFooter}
-        />
-      </View>
-    </SafeAreaView>
+    <View style={styles.container}>
+      <FlatList
+        style={{width: '100%'}}
+        keyExtractor={(item, index) => item.url + index.toString()}
+        data={qs.questions}
+        renderItem={renderItem}
+        onEndReached={endReached}
+        onEndReachedThreshold={0.1}
+        ItemSeparatorComponent={() => <View style={styles.separator} />}
+        ListFooterComponent={renderFooter}
+      />
+    </View>
   );
-}
+};
+
+export default QuestionListScreen;
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: 'white',
   },
   separator: {
     height: 0.5,
