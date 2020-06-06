@@ -1,11 +1,12 @@
 import {Reducer} from 'redux';
-import {QuestionActions} from '../actions';
 import {Question} from '../../Models/Question';
+import {QuestionActions} from '../actions';
+import {AxiosError} from 'axios';
 
 export interface QuestionState {
   questions: Question[];
   isFetching: boolean;
-  error?: Error;
+  error?: AxiosError;
 }
 
 const initialQuestionState: QuestionState = {
@@ -28,10 +29,12 @@ export const questions: Reducer<QuestionState, QuestionActions> = (
       return {
         ...state,
         isFetching: true,
+        error: undefined,
       };
     case QuestionActionTypes.FETCH_QUESTION_SUCCESS:
       let newQuestions = [...state.questions];
-      if (!state.questions.find((x) => x.url === action.question.url)) {
+      if (!state.questions.find((x) => x.url === action.question!.url)) {
+        action.question.id = action.page;
         newQuestions.push(action.question);
       }
 

@@ -7,4 +7,6 @@ const api = axios.create({
   },
 });
 
-export const getQuestion = (page: number) => api.get(`questions/${page}`);
+export const getQuestions = (page: number = 1) => {
+  return api.get(`questions/${page}`);
+};
