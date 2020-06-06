@@ -1,5 +1,12 @@
 import React from 'react';
-import {StyleSheet, View, Text, Alert} from 'react-native';
+import {
+  StyleSheet,
+  View,
+  Text,
+  Alert,
+  ScrollView,
+  TouchableOpacity,
+} from 'react-native';
 import {useSelector, useDispatch} from 'react-redux';
 import {RootState} from '../store/reducers';
 import {RootStackParamList} from '../../App';
@@ -7,7 +14,6 @@ import {StackNavigationProp} from '@react-navigation/stack';
 import {RouteProp} from '@react-navigation/native';
 import ErrorView from '../components/ErrorView';
 import {sum} from '../utils';
-import {TouchableOpacity, ScrollView} from 'react-native-gesture-handler';
 import {voteQuestion} from '../../PollsService';
 import {updateVoteWithUrl} from '../store/actions';
 

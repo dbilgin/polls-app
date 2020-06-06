@@ -5,10 +5,12 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import QuestionListScreen from './src/screens/QuestionListScreen';
 import QuestionDetailScreen from './src/screens/QuestionDetailScreen';
+import QuestionAddScreen from './src/screens/QuestionAddScreen';
 
 export type RootStackParamList = {
   QuestionListScreen: undefined;
   QuestionDetailScreen: {questionId: number};
+  QuestionAddScreen: undefined;
 };
 
 const Stack = createStackNavigator<RootStackParamList>();
@@ -27,6 +29,11 @@ export default function App() {
             name="QuestionDetailScreen"
             component={QuestionDetailScreen}
             options={{title: 'Question'}}
+          />
+          <Stack.Screen
+            name="QuestionAddScreen"
+            component={QuestionAddScreen}
+            options={{title: 'Add Question'}}
           />
         </Stack.Navigator>
       </Provider>

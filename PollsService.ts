@@ -14,3 +14,7 @@ export const getQuestions = (page: number = 1) => {
 export const voteQuestion = (questionId: number, choiceId: number) => {
   return api.post(`questions/${questionId}/choices/${choiceId}`);
 };
+
+export const addQuestion = (title: string, chocies: string[]) => {
+  return api.post('questions', {question: title, choices: chocies});
+};

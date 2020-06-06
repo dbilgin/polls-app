@@ -33,6 +33,14 @@ export const questions: Reducer<QuestionState, QuestionActions> = (
         error: undefined,
       };
     case QuestionActionTypes.FETCH_QUESTION_SUCCESS:
+      // Check if the previous pages are already loaded
+      if (
+        action.page > 1 &&
+        !state.questions.find((x) => x.id === action.page - 1)
+      ) {
+        return state;
+      }
+
       let newQuestions = [...state.questions];
       if (!state.questions.find((x) => x.url === action.question!.url)) {
         action.question.id = action.page;

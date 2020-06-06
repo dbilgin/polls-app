@@ -4,9 +4,9 @@ import {
   StyleSheet,
   View,
   Text,
-  FlatList,
   ActivityIndicator,
   TouchableOpacity,
+  SafeAreaView,
 } from 'react-native';
 import {fetchQuestion} from '../store/actions';
 import {RootState} from '../store/reducers';
@@ -14,6 +14,9 @@ import {Question} from '../../Models/Question';
 import QuestionCard from '../components/QuestionCard';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {RootStackParamList} from '../../App';
+import {FAB} from 'react-native-paper';
+import {debounce} from 'lodash';
+import Swiper from 'react-native-swiper';
 
 const images = [
   require('../images/1.png'),
@@ -36,21 +39,26 @@ const QuestionListScreen: React.FC<Props> = ({navigation}) => {
 
   useEffect(() => {
     dispatch(fetchQuestion(1));
+    dispatch(fetchQuestion(2));
   }, [dispatch]);
 
   const renderFooter = () => {
     return (
-      <View>
-        {qs.isFetching ? (
-          <ActivityIndicator color="black" style={{marginLeft: 8}} />
-        ) : qs.error?.response?.status !== 404 ? (
-          <TouchableOpacity style={styles.errorButton} onPress={requestNewPage}>
-            <Text style={styles.loadText}>
-              An error has occurred, press here to retry
-            </Text>
-          </TouchableOpacity>
-        ) : null}
-      </View>
+      <SafeAreaView>
+        <View style={{height: 50}}>
+          {qs.isFetching ? (
+            <ActivityIndicator color="black" />
+          ) : !!qs.error && qs.error?.response?.status !== 404 ? (
+            <TouchableOpacity
+              style={styles.errorButton}
+              onPress={() => debounceRequestNewPage()}>
+              <Text style={styles.loadText}>
+                An error has occurred, press here to retry
+              </Text>
+            </TouchableOpacity>
+          ) : null}
+        </View>
+      </SafeAreaView>
     );
   };
 
@@ -61,17 +69,22 @@ const QuestionListScreen: React.FC<Props> = ({navigation}) => {
     }
     const randomImage = images[newIndex];
     return (
-      <QuestionCard q={item} image={randomImage} navigation={navigation} />
+      <QuestionCard
+        key={item.url + 'card'}
+        q={item}
+        image={randomImage}
+        navigation={navigation}
+      />
     );
   };
 
   const endReached = () => {
     if (qs.error?.response?.status !== 404) {
-      requestNewPage();
+      debounceRequestNewPage();
     }
   };
 
-  const requestNewPage = () => {
+  const debounceRequestNewPage = debounce(() => {
     const maxId = Math.max.apply(
       Math,
       qs.questions.map((o) => {
@@ -80,20 +93,29 @@ const QuestionListScreen: React.FC<Props> = ({navigation}) => {
     );
 
     dispatch(fetchQuestion(maxId + 1));
-  };
+  }, 100);
 
   return (
     <View style={styles.container}>
-      <FlatList
-        style={{width: '100%'}}
-        keyExtractor={(item, index) => item.url + index.toString()}
-        data={qs.questions}
-        renderItem={renderItem}
-        onEndReached={endReached}
-        onEndReachedThreshold={0.1}
-        ItemSeparatorComponent={() => <View style={styles.separator} />}
-        ListFooterComponent={renderFooter}
+      <Swiper
+        loop={false}
+        showsButtons={true}
+        onIndexChanged={(index) => {
+          if (qs.questions.length - (index + 1) < 1) {
+            endReached();
+          }
+        }}>
+        {qs.questions.map((question: Question, index: number) =>
+          renderItem({item: question, index: index}),
+        )}
+      </Swiper>
+
+      <FAB
+        style={styles.fab}
+        icon="plus"
+        onPress={() => navigation.navigate('QuestionAddScreen')}
       />
+      {renderFooter()}
     </View>
   );
 };
@@ -101,11 +123,18 @@ const QuestionListScreen: React.FC<Props> = ({navigation}) => {
 export default QuestionListScreen;
 
 const styles = StyleSheet.create({
+  fab: {
+    position: 'absolute',
+    margin: 30,
+    right: 0,
+    bottom: 0,
+    backgroundColor: '#147efb',
+  },
   container: {
+    backgroundColor: 'white',
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'white',
   },
   separator: {
     height: 0.5,
