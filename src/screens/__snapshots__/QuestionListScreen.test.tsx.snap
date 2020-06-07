@@ -1,0 +1,136 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Rendering should match to snapshot 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "center",
+      "backgroundColor": "white",
+      "flex": 1,
+      "justifyContent": "center",
+    }
+  }
+>
+  <_default
+    automaticallyAdjustContentInsets={false}
+    autoplay={false}
+    autoplayDirection={true}
+    autoplayTimeout={2.5}
+    bounces={false}
+    disableNextButton={false}
+    disablePrevButton={false}
+    horizontal={true}
+    index={0}
+    loadMinimal={false}
+    loadMinimalSize={1}
+    loop={false}
+    onIndexChanged={[Function]}
+    pagingEnabled={true}
+    removeClippedSubviews={true}
+    scrollsToTop={false}
+    showsButtons={true}
+    showsHorizontalScrollIndicator={false}
+    showsPagination={false}
+    showsVerticalScrollIndicator={false}
+  >
+    <QuestionCard
+      image={
+        Object {
+          "testUri": "../../../src/images/1.png",
+        }
+      }
+      key="/url/1card"
+      navigation={
+        Object {
+          "goBack": [MockFunction],
+          "navigate": [MockFunction],
+        }
+      }
+      q={
+        Object {
+          "choices": Array [
+            Object {
+              "choice": "choice 1",
+              "url": "url/1",
+              "votes": 0,
+            },
+          ],
+          "id": 1,
+          "published_at": 2020-06-07T18:21:01.371Z,
+          "question": "question",
+          "url": "/url/1",
+        }
+      }
+    />
+    <QuestionCard
+      image={
+        Object {
+          "testUri": "../../../src/images/2.png",
+        }
+      }
+      key="/url/2card"
+      navigation={
+        Object {
+          "goBack": [MockFunction],
+          "navigate": [MockFunction],
+        }
+      }
+      q={
+        Object {
+          "choices": Array [
+            Object {
+              "choice": "choice 1",
+              "url": "url/1",
+              "votes": 0,
+            },
+          ],
+          "id": 2,
+          "published_at": 2020-06-07T18:21:01.371Z,
+          "question": "question",
+          "url": "/url/2",
+        }
+      }
+    />
+  </_default>
+  <TouchableOpacity
+    activeOpacity={0.2}
+    onPress={[Function]}
+    style={
+      Object {
+        "backgroundColor": "#147efb",
+        "borderRadius": 50,
+        "borderWidth": 0,
+        "bottom": 0,
+        "margin": 30,
+        "padding": 15,
+        "position": "absolute",
+        "right": 0,
+      }
+    }
+  >
+    <Image
+      source={
+        Object {
+          "testUri": "../../../src/images/plus.png",
+        }
+      }
+      style={
+        Object {
+          "height": 40,
+          "tintColor": "white",
+          "width": 40,
+        }
+      }
+    />
+  </TouchableOpacity>
+  <SafeAreaView>
+    <View
+      style={
+        Object {
+          "height": 50,
+        }
+      }
+    />
+  </SafeAreaView>
+</View>
+`;

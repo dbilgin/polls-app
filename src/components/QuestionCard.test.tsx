@@ -1,11 +1,8 @@
 import React from 'react';
-import Enzyme, {shallow} from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
+import {shallow} from 'enzyme';
 import QuestionCard from './QuestionCard';
 import {Question} from '../../Models/Question';
 import {SafeAreaView, TouchableOpacity, View, Image, Text} from 'react-native';
-
-Enzyme.configure({adapter: new Adapter()});
 
 const createTestProps = () => ({
   navigation: {
@@ -26,7 +23,7 @@ describe('QuestionCard', () => {
         id: 1,
         question: 'question',
         choices: [],
-        published_at: new Date(),
+        published_at: new Date('2020-06-07T18:21:01.371Z'),
         url: '/url',
       };
 
@@ -46,7 +43,7 @@ describe('QuestionCard', () => {
         id: 1,
         question: 'question',
         choices: [],
-        published_at: new Date(),
+        published_at: new Date('2020-06-07T18:21:01.371Z'),
         url: '/url',
       };
 
@@ -71,7 +68,7 @@ describe('QuestionCard', () => {
         id: 1,
         question: 'question',
         choices: [],
-        published_at: new Date(),
+        published_at: new Date('2020-06-07T18:21:01.371Z'),
         url: '/url',
       };
 
@@ -86,7 +83,7 @@ describe('QuestionCard', () => {
       const question: Question = {
         question: 'question',
         choices: [],
-        published_at: new Date(),
+        published_at: new Date('2020-06-07T18:21:01.371Z'),
         url: '/url',
       };
 

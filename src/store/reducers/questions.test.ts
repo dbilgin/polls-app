@@ -6,7 +6,7 @@ const mockQuestion: Question = {
   id: 1,
   question: 'question',
   choices: [{choice: 'choice 1', url: 'url/1', votes: 0}],
-  published_at: new Date(),
+  published_at: new Date('2020-06-07T18:21:01.371Z'),
   url: '/url/1',
 };
 

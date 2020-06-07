@@ -1,12 +1,9 @@
 import React from 'react';
-import Enzyme, {shallow} from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
+import {shallow} from 'enzyme';
 import {TouchableOpacity, ActivityIndicator, SafeAreaView} from 'react-native';
 import QuestionListScreen from './QuestionListScreen';
 import QuestionCard from '../components/QuestionCard';
 import Swiper from 'react-native-swiper';
-
-Enzyme.configure({adapter: new Adapter()});
 
 const createTestProps = () => ({
   route: {
@@ -32,14 +29,14 @@ jest.mock('react-redux', () => ({
           id: 1,
           question: 'question',
           choices: [{choice: 'choice 1', url: 'url/1', votes: 0}],
-          published_at: new Date(),
+          published_at: new Date('2020-06-07T18:21:01.371Z'),
           url: '/url/1',
         },
         {
           id: 2,
           question: 'question',
           choices: [{choice: 'choice 1', url: 'url/1', votes: 0}],
-          published_at: new Date(),
+          published_at: new Date('2020-06-07T18:21:01.371Z'),
           url: '/url/2',
         },
       ],
@@ -49,6 +46,18 @@ jest.mock('react-redux', () => ({
   },
   useDispatch: () => jest.fn(),
 }));
+
+describe('Rendering', () => {
+  let props: any;
+  beforeEach(() => {
+    props = createTestProps();
+  });
+
+  it('should match to snapshot', () => {
+    const component = shallow(<QuestionListScreen {...props} />);
+    expect(component).toMatchSnapshot();
+  });
+});
 
 describe('UI Placements', () => {
   let props: any;

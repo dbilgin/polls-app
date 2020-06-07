@@ -112,7 +112,6 @@ const QuestionListScreen: React.FC<Props> = ({navigation}) => {
           )}
         </Swiper>
       )}
-
       <TouchableOpacity
         onPress={() => navigation.navigate('QuestionAddScreen')}
         style={styles.fab}>

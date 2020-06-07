@@ -1,10 +1,7 @@
 import React from 'react';
-import Enzyme, {shallow} from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
+import {shallow} from 'enzyme';
 import {TouchableOpacity} from 'react-native';
 import QuestionDetailScreen from './QuestionDetailScreen';
-
-Enzyme.configure({adapter: new Adapter()});
 
 const createTestProps = () => ({
   route: {
@@ -28,7 +25,7 @@ jest.mock('react-redux', () => ({
       id: 1,
       question: 'question',
       choices: [{choice: 'choice 1', url: 'url/1', votes: 0}],
-      published_at: new Date(),
+      published_at: new Date('2020-06-07T18:21:01.371Z'),
       url: '/url/1',
     };
   },
