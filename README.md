@@ -1,7 +1,7 @@
 # polls-app
 
 ## How to run the app
-* As this an expo project, if you do not have expo installed first run:
+* As this an expo project, if you do not have expo installed, first run:
 ```
 npm install --global expo-cli
 ```
