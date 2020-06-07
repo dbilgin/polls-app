@@ -97,18 +97,21 @@ const QuestionListScreen: React.FC<Props> = ({navigation}) => {
 
   return (
     <View style={styles.container}>
-      <Swiper
-        loop={false}
-        showsButtons={true}
-        onIndexChanged={(index) => {
-          if (qs.questions.length - (index + 1) < 1) {
-            endReached();
-          }
-        }}>
-        {qs.questions.map((question: Question, index: number) =>
-          renderItem({item: question, index: index}),
-        )}
-      </Swiper>
+      {qs.questions.length > 1 && (
+        <Swiper
+          loop={false}
+          showsPagination={false}
+          showsButtons={true}
+          onIndexChanged={(index) => {
+            if (qs.questions.length - (index + 1) < 1) {
+              endReached();
+            }
+          }}>
+          {qs.questions.map((question: Question, index: number) =>
+            renderItem({item: question, index: index}),
+          )}
+        </Swiper>
+      )}
 
       <FAB
         style={styles.fab}
