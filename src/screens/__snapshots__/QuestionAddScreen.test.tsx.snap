@@ -1,3 +1,114 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`QuestionAddScreen Rendering should match to snapshot 1`] = `ShallowWrapper {}`;
+exports[`QuestionAddScreen Rendering should match to snapshot 1`] = `
+<View
+  style={
+    Object {
+      "backgroundColor": "white",
+      "flex": 1,
+      "justifyContent": "center",
+    }
+  }
+>
+  <ScrollViewMock>
+    <View
+      style={
+        Object {
+          "padding": 24,
+        }
+      }
+    >
+      <TextInput
+        allowFontScaling={true}
+        onChangeText={[Function]}
+        rejectResponderTermination={true}
+        style={
+          Object {
+            "borderColor": "gray",
+            "borderRadius": 16,
+            "borderWidth": 1,
+            "height": 40,
+            "marginTop": 8,
+            "paddingLeft": 12,
+            "paddingRight": 12,
+          }
+        }
+        underlineColorAndroid="transparent"
+      />
+      <Text
+        style={
+          Object {
+            "color": "#505b7d",
+            "fontSize": 24,
+            "marginTop": 18,
+          }
+        }
+      >
+        Choices
+      </Text>
+      <TouchableOpacity
+        activeOpacity={0.2}
+        onPress={[Function]}
+        style={
+          Object {
+            "marginTop": 18,
+          }
+        }
+      >
+        <View
+          style={
+            Object {
+              "alignItems": "center",
+              "backgroundColor": "#147efb",
+              "height": 50,
+              "justifyContent": "center",
+            }
+          }
+        >
+          <Text
+            style={
+              Object {
+                "color": "white",
+                "fontSize": 16,
+              }
+            }
+          >
+            Add New Choice
+          </Text>
+        </View>
+      </TouchableOpacity>
+    </View>
+  </ScrollViewMock>
+  <TouchableOpacity
+    activeOpacity={0.2}
+    onPress={[Function]}
+    style={
+      Object {
+        "backgroundColor": "#147efb",
+        "borderRadius": 50,
+        "borderWidth": 0,
+        "bottom": 0,
+        "margin": 30,
+        "padding": 15,
+        "position": "absolute",
+        "right": 0,
+      }
+    }
+  >
+    <Image
+      source={
+        Object {
+          "testUri": "../../../src/images/save.png",
+        }
+      }
+      style={
+        Object {
+          "height": 40,
+          "tintColor": "white",
+          "width": 40,
+        }
+      }
+    />
+  </TouchableOpacity>
+</View>
+`;

@@ -1,9 +1,12 @@
 import React from 'react';
-import {shallow} from 'enzyme';
+import Enzyme, {shallow} from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
 import {TouchableOpacity, ActivityIndicator, SafeAreaView} from 'react-native';
 import QuestionListScreen from './QuestionListScreen';
 import QuestionCard from '../components/QuestionCard';
 import Swiper from 'react-native-swiper';
+
+Enzyme.configure({adapter: new Adapter()});
 
 const createTestProps = () => ({
   route: {

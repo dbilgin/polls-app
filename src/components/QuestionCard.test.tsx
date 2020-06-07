@@ -1,8 +1,11 @@
 import React from 'react';
-import {shallow} from 'enzyme';
+import Enzyme, {shallow} from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
 import QuestionCard from './QuestionCard';
 import {Question} from '../../Models/Question';
 import {SafeAreaView, TouchableOpacity, View, Image, Text} from 'react-native';
+
+Enzyme.configure({adapter: new Adapter()});
 
 const createTestProps = () => ({
   navigation: {
