@@ -8,7 +8,7 @@ import axios from 'axios';
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
 
-jest.mock('axios', () => jest.requireActual('../__mocks__/axios'));
+jest.mock('axios', () => jest.requireActual('../../__mocks__/axios'));
 
 describe('async actions', () => {
   afterEach(() => {

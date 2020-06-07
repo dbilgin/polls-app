@@ -7,6 +7,7 @@ import {
   ActivityIndicator,
   TouchableOpacity,
   SafeAreaView,
+  Image,
 } from 'react-native';
 import {fetchQuestion} from '../store/actions';
 import {RootState} from '../store/reducers';
@@ -14,7 +15,6 @@ import {Question} from '../../Models/Question';
 import QuestionCard from '../components/QuestionCard';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {RootStackParamList} from '../../App';
-import {FAB} from 'react-native-paper';
 import {debounce} from 'lodash';
 import Swiper from 'react-native-swiper';
 
@@ -113,11 +113,11 @@ const QuestionListScreen: React.FC<Props> = ({navigation}) => {
         </Swiper>
       )}
 
-      <FAB
-        style={styles.fab}
-        icon="plus"
+      <TouchableOpacity
         onPress={() => navigation.navigate('QuestionAddScreen')}
-      />
+        style={styles.fab}>
+        <Image source={require('../images/plus.png')} style={styles.fabImage} />
+      </TouchableOpacity>
       {renderFooter()}
     </View>
   );
@@ -126,8 +126,16 @@ const QuestionListScreen: React.FC<Props> = ({navigation}) => {
 export default QuestionListScreen;
 
 const styles = StyleSheet.create({
+  fabImage: {
+    height: 40,
+    width: 40,
+    tintColor: 'white',
+  },
   fab: {
     position: 'absolute',
+    padding: 15,
+    borderWidth: 0,
+    borderRadius: 50,
     margin: 30,
     right: 0,
     bottom: 0,

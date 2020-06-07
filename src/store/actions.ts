@@ -1,6 +1,6 @@
 import {QuestionActionTypes} from './reducers/questions';
 import {Question} from '../../Models/Question';
-import {getQuestions} from '../../PollsService';
+import {getQuestions} from '../PollsService';
 import {Dispatch} from 'redux';
 import {AxiosError} from 'axios';
 

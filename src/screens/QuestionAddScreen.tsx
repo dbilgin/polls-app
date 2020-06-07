@@ -7,13 +7,13 @@ import {
   ScrollView,
   TouchableOpacity,
   Text,
+  Image,
 } from 'react-native';
 import {useDispatch} from 'react-redux';
 import {RootStackParamList} from '../../App';
 import {StackNavigationProp} from '@react-navigation/stack';
-import {addQuestion} from '../../PollsService';
+import {addQuestion} from '../PollsService';
 import {debounce} from 'lodash';
-import {FAB} from 'react-native-paper';
 import {fetchQuestionSuccess} from '../store/actions';
 import {Question} from '../../Models/Question';
 
@@ -102,7 +102,9 @@ const QuestionAddScreen: React.FC<Props> = ({navigation}) => {
         </View>
       </ScrollView>
 
-      <FAB style={styles.fab} icon="content-save" onPress={() => add()} />
+      <TouchableOpacity onPress={() => add()} style={styles.fab}>
+        <Image source={require('../images/save.png')} style={styles.fabImage} />
+      </TouchableOpacity>
     </View>
   );
 };
@@ -110,8 +112,16 @@ const QuestionAddScreen: React.FC<Props> = ({navigation}) => {
 export default QuestionAddScreen;
 
 const styles = StyleSheet.create({
+  fabImage: {
+    height: 40,
+    width: 40,
+    tintColor: 'white',
+  },
   fab: {
     position: 'absolute',
+    padding: 15,
+    borderWidth: 0,
+    borderRadius: 50,
     margin: 30,
     right: 0,
     bottom: 0,

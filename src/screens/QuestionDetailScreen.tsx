@@ -14,7 +14,7 @@ import {StackNavigationProp} from '@react-navigation/stack';
 import {RouteProp} from '@react-navigation/native';
 import ErrorView from '../components/ErrorView';
 import {sum} from '../utils';
-import {voteQuestion} from '../../PollsService';
+import {voteQuestion} from '../PollsService';
 import {updateVoteWithUrl} from '../store/actions';
 
 type ProfileScreenRouteProp = RouteProp<
